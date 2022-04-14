@@ -76,7 +76,6 @@ function makeVideoCards(arr) {
         let videoWrapper = document.createElement('div')
         videoWrapper.className = 'video-wrapper'
         wrapper.appendChild(videoWrapper)
-        let title = document.createElement('h3')
         let videoIframe = document.createElement('iframe')
         videoIframe.className = 'video'
         videoWrapper.appendChild(videoIframe)
