@@ -8,8 +8,9 @@ module.exports = {
     entry: {
         main:'./src/index.js'},
     output: {
-        filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name].[git-revision-hash].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: 'http://my-fancy-cdn.com/[git-revision-version]/'
     },
     plugins: [
     new HTMLWebpackPlugin({
