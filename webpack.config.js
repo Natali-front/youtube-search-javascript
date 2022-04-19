@@ -1,6 +1,7 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const { GitRevisionPlugin } = require('git-revision-webpack-plugin')
 
 module.exports = {
     mode: 'development',
@@ -14,7 +15,8 @@ module.exports = {
     new HTMLWebpackPlugin({
         template: './src/index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new GitRevisionPlugin()
     ],
     module: {
         rules: [
