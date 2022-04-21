@@ -8,4 +8,3 @@ btn.addEventListener('click', function () {
     setTimeout(makeVideoCards(bubbleSort(list)), 1000)
 })
 
-

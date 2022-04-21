@@ -26,6 +26,7 @@
     "webpack-cli": "^4.9.2"
   },
   "dependencies": {
+    "async-wait-until": "^2.0.12",
     "git-revision-webpack-plugin": "^5.0.0"
   }
 }

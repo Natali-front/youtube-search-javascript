@@ -43,6 +43,7 @@ export default class LinkedList {
         }
         length--
     }
+    
 }
 export function swap(list, a, b) {
     let temp = list.elementAt(a).data;
