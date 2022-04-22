@@ -51,6 +51,7 @@
         grid-template-columns: 32% 32% 32%;
         grid-row-gap: 1rem;
         grid-column-gap: 1rem;
+        border-left: 1px solid grey;
 }
 .sort {
         display: none;
@@ -78,10 +79,12 @@ span:hover::before {
         fill: red;
 
 } */
-.heart {
-        fill:red;
-        width: 25px;
-        height: 25px;
+.svg-inline--fa{
+        width: 20px;
+        height: 20px;
+}
+.svg-inline--fa:hover {
+        color:red;
 }
 .arrow-down {
         width: 15px;

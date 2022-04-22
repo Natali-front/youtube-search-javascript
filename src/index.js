@@ -1,10 +1,13 @@
-import {searchYoutube, makeVideoCards,list} from './youtube-list/youtube'
-import { bubbleSort } from './linkedList'
+import {searchYoutube} from './youtube-list/youtube'
+import '@fortawesome/fontawesome-free/js/fontawesome'
+import '@fortawesome/fontawesome-free/js/solid'
+import '@fortawesome/fontawesome-free/js/regular'
+import '@fortawesome/fontawesome-free/js/brands'
+
 
 export const wrapper = document.querySelector('.wrapper')
 document.getElementById('request').addEventListener('change', searchYoutube)
-export const btn = document.querySelector('.sort')
-btn.addEventListener('click', function () {
-    setTimeout(makeVideoCards(bubbleSort(list)), 1000)
-})
+
+
+
 

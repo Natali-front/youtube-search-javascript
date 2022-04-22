@@ -3,11 +3,12 @@ import { wrapper, btn } from '..';
 
 
 
-const apiKey = "AIzaSyDtkb7Y94QYrpoWiQ78KkqKv_Bsbcb0txs"
+const apiKey = "AIzaSyAv0V5Nw_cz4kvP8bNgtSGNuphlqYZ4c5s"
 let nextPageToken = null
 let request = null
 let amount = 9
 export const list = new LinkedList()
+export const favoriteList = new LinkedList()
 
 export async function searchYoutube(e) {
     let request = e.target.value
@@ -34,16 +35,17 @@ export function makeVideoCards() {
         let videoWrapper = document.createElement('div')
         videoWrapper.className = 'video-wrapper'
         wrapper.appendChild(videoWrapper)
-        let videoIframe = document.createElement('iframe')
-        let heart = document.createElement('object')
-        heart.data = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xMiAyMS41OTNjLTUuNjMtNS41MzktMTEtMTAuMjk3LTExLTE0LjQwMiAwLTMuNzkxIDMuMDY4LTUuMTkxIDUuMjgxLTUuMTkxIDEuMzEyIDAgNC4xNTEuNTAxIDUuNzE5IDQuNDU3IDEuNTktMy45NjggNC40NjQtNC40NDcgNS43MjYtNC40NDcgMi41NCAwIDUuMjc0IDEuNjIxIDUuMjc0IDUuMTgxIDAgNC4wNjktNS4xMzYgOC42MjUtMTEgMTQuNDAybTUuNzI2LTIwLjU4M2MtMi4yMDMgMC00LjQ0NiAxLjA0Mi01LjcyNiAzLjIzOC0xLjI4NS0yLjIwNi0zLjUyMi0zLjI0OC01LjcxOS0zLjI0OC0zLjE4MyAwLTYuMjgxIDIuMTg3LTYuMjgxIDYuMTkxIDAgNC42NjEgNS41NzEgOS40MjkgMTIgMTUuODA5IDYuNDMtNi4zOCAxMi0xMS4xNDggMTItMTUuODA5IDAtNC4wMTEtMy4wOTUtNi4xODEtNi4yNzQtNi4xODEiLz48L3N2Zz4="
-        heart.className = 'heart'
+        let videoIframe = document.createElement('iframe');
+        let heart = document.createElement('i')
+        heart.className = "fa-regular fa-heart"
+        
         videoWrapper.appendChild(heart)
         videoIframe.className = 'video'
         videoWrapper.appendChild(videoIframe)
        
         if (list.elementAt(i)) {
             let videoId = list.elementAt(i).data
+            heart.id = list.elementAt(i).data
             videoIframe.src = `http://www.youtube.com/embed/${videoId}?autoplay=1?enablejsapi=1&origin=http://localhost:4200`
         }    
     }
@@ -58,9 +60,15 @@ export function makeVideoCards() {
         btnLoadMore.className="btn-load-more"
         wrapper.appendChild(btnLoadMore)
         btnLoadMore.addEventListener('click', makePagination)
+
+        wrapper.addEventListener('click',  event => {
+            favoriteList.add(event.target.id)
+            console.log(event.target.id, favoriteList)
+        })
 }
 
-    
+  
+
 
 
 async function makePagination() {
