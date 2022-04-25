@@ -47,11 +47,13 @@
 }
 .wrapper {
         width: 65%;
+        height: 100vh;
         display: grid;
         grid-template-columns: 32% 32% 32%;
         grid-row-gap: 1rem;
         grid-column-gap: 1rem;
         border-left: 1px solid grey;
+        overflow-y: scroll;
 }
 .sort {
         display: none;
@@ -84,6 +86,9 @@ span:hover::before {
         height: 20px;
 }
 .svg-inline--fa:hover {
+        color:red;
+}
+.svg-inline--fa .favorite {
         color:red;
 }
 .arrow-down {

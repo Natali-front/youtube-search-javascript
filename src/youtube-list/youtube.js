@@ -3,12 +3,17 @@ import { wrapper, btn } from '..';
 
 
 
-const apiKey = "AIzaSyAv0V5Nw_cz4kvP8bNgtSGNuphlqYZ4c5s"
+
+const apiKey = "AIzaSyDCFEcJp4-J6fZO6OGhg387fDsaIlDb90k"
 let nextPageToken = null
 let request = null
 let amount = 9
 export const list = new LinkedList()
-export const favoriteList = new LinkedList()
+
+
+
+
+
 
 export async function searchYoutube(e) {
     let request = e.target.value
@@ -19,6 +24,7 @@ export async function searchYoutube(e) {
         results.items.map(item => {
             list.add(item.id.videoId)
         })
+        console.log(list)
         nextPageToken = results.nextPageToken
         console.log(nextPageToken)
         makeVideoCards(list)
@@ -31,7 +37,7 @@ export function makeVideoCards() {
     if (wrapper) {
         wrapper.innerHTML=''
     }
-        for (let i = 1; i <= list.size(); i++) {
+        for (let i = 1; i <=list.size(); i++) {
         let videoWrapper = document.createElement('div')
         videoWrapper.className = 'video-wrapper'
         wrapper.appendChild(videoWrapper)
@@ -48,8 +54,9 @@ export function makeVideoCards() {
             heart.id = list.elementAt(i).data
             videoIframe.src = `http://www.youtube.com/embed/${videoId}?autoplay=1?enablejsapi=1&origin=http://localhost:4200`
         }    
-    }
-    
+        }
+   
+  
     
     let btnLoadMore = document.createElement('button')
     let arrowDown = document.createElement('object')
@@ -61,19 +68,14 @@ export function makeVideoCards() {
         wrapper.appendChild(btnLoadMore)
         btnLoadMore.addEventListener('click', makePagination)
 
-        wrapper.addEventListener('click',  event => {
-            favoriteList.add(event.target.id)
-            console.log(event.target.id, favoriteList)
-        })
 }
 
-  
 
 
 
 async function makePagination() {
     try {
-        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=9&type=video&key=${apiKey}&singleEvents=true&pageToken=${nextPageToken}`)
+        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}&singleEvents=true&pageToken=${nextPageToken}`)
         let results = await response.json()
 
         results.items.map(item => {
@@ -86,4 +88,5 @@ async function makePagination() {
         console.log(error)
     }
 }
+
 
