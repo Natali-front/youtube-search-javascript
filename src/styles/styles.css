@@ -32,14 +32,53 @@ main {
         overflow: hidden;
 }
 .favorite-wrapper{
+        width: 35%;
         height: 100vh;
         margin-left: 20px;
         padding:0 50px 0;
-        border-left: 1px dotted gray;
+        border: 1px dotted gray;
         position: relative;
-        overflow-y: scroll;
+        overflow-y: scroll;     
+}
+
+.header-favorite {
+        padding-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         
 }
+.header-favorite h2 {
+        font-family: "Raleway", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+}
+.header-favorite img {
+        width: 30px;
+        height: 30px;
+        position: absolute; 
+        left: 3%;
+        top: 4%;
+    
+        overflow: hidden
+}
+
+.delete-list-btn {
+        width: 8rem;
+        height: 3rem;
+        border-radius: 5px;
+        background-color: rgb(243, 170, 82);
+        cursor: pointer;
+        font-family: "Raleway", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+}
+.delete-list-btn svg {
+        margin-left: 5px;
+        width: 12px;
+        height: 12px;
+}
+
 .video-wrapper {
         min-height: 300px;
         padding: 0.5rem;

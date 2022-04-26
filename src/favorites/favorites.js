@@ -47,14 +47,14 @@ export function makeFavoriteVideoCards() {
             videoIframe.src = `http://www.youtube.com/embed/${videoId}?autoplay=1?enablejsapi=1&origin=http://localhost:4200`
         }    
     }
-    // }  Array.from(document.querySelectorAll('.btn-delete'), item => {
-    //     item.addEventListener('click', event => {
-    //         console.log(event.target.value)
-    //     })
-    // })
+    }  Array.from(document.querySelectorAll('.btn-delete'), item => {
+        item.addEventListener('click', event => {
+            console.log(event.target.value)
+        })
+    })
           
 
-}
+
 
 
 

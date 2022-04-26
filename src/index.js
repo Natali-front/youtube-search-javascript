@@ -10,16 +10,15 @@ export const wrapper = document.querySelector('.wrapper')
 export const wrapperFavorite = document.querySelector('.favorite-wrapper')
 document.getElementById('request').addEventListener('change', searchYoutube)
 
-makeFavoriteList()
-makeFavoriteVideoCards()
+// makeFavoriteList(list)
+// makeFavoriteVideoCards(list)
 
 wrapper.addEventListener('click',  event => {
         let arr = getIdFromLocalStorage()
         JSON.parse(localStorage.getItem('myFavoriteList'))
         arr.push(event.target.id)
         localStorage.setItem('myFavoriteList', JSON.stringify(arr))
-        makeFavoriteList()
-        makeFavoriteVideoCards()
+       
 })
   function getIdFromLocalStorage() {
       return JSON.parse(localStorage.getItem('myFavoriteList') || '[]')
