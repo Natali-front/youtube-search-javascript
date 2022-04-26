@@ -10,8 +10,8 @@ export const wrapper = document.querySelector('.wrapper')
 export const wrapperFavorite = document.querySelector('.favorite-wrapper')
 document.getElementById('request').addEventListener('change', searchYoutube)
 
-// makeFavoriteList(list)
-// makeFavoriteVideoCards(list)
+
+
 
 wrapper.addEventListener('click',  event => {
         let arr = getIdFromLocalStorage()

@@ -43,7 +43,37 @@ export default class LinkedList {
         }
         length--
     }
-    
+    removeAt(index) {
+        let currentNode = this.head 
+        let previousNode
+        let currentIndex = 0
+        if (index < 0 || index >= length)
+        if(index===0) {
+            head = currentIndex.next
+        }else {
+            while (currentIndex < index) {
+                currentIndex++
+                previousNode = currentNode
+                currentNode = currentNode.next
+            }
+            previousNode.next = currentNode.next
+        }
+        length--
+        return currentNode.element
+    }
+
+    deleteList() {
+        this.head === null
+    }
+    toArray() {
+        const nodes = [];
+        let currentNode = this.head;
+        while (currentNode) {
+            nodes.push(currentNode);
+            currentNode = currentNode.next;
+        }
+        return nodes;
+    }
 }
 export function swap(list, a, b) {
     let temp = list.elementAt(a).data;

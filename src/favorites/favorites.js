@@ -3,19 +3,23 @@ import { wrapperFavorite } from ".."
 
 export const favoriteList = new LinkedList()
 
-export function makeFavoriteList() {
-    if(wrapperFavorite) {
-        wrapperFavorite.innerHTML = ''
-    }
-   JSON.parse(localStorage.getItem('myFavoriteList')).map(item => 
-    favoriteList.add(item)
-    )
+// export function makeFavoriteList() {
+//     if(wrapperFavorite) {
+//         wrapperFavorite.innerHTML = ''
+//     }
+//    JSON.parse(localStorage.getItem('myFavoriteList')).map(item => 
+//     favoriteList.add(item)
+//     )
     
-}
+// }
 export function makeFavoriteVideoCards() {
-    if(wrapperFavorite) {
+   JSON.parse(localStorage.getItem('myFavoriteList')).map(item => 
+        favoriteList.add(item)
+        ) 
+        if(wrapperFavorite) {
         wrapperFavorite.innerHTML= ''
     }
+    
     for(let i=1; i<=favoriteList.size(); i++) {
         let videoFavorite = document.createElement('div')
         videoFavorite.className = 'video-favorite'
