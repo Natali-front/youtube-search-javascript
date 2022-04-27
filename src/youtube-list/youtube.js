@@ -1,22 +1,20 @@
 import LinkedList from '../linkedList';
-import { wrapper, btn } from '..';
+import { wrapper } from '..';
 
 
 const apiKey = "AIzaSyDCFEcJp4-J6fZO6OGhg387fDsaIlDb90k"
 let nextPageToken = null
-let request = null
 let amount = 9
 export const list = new LinkedList()
 
 export async function searchYoutube(e) {
     let request = e.target.value
     try {
-        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}&singleEvents=true`)
+        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}`)
         let results = await response.json()
             results.items.map(item => {
             list.add(item.id.videoId)
         })
-        
         nextPageToken = results.nextPageToken
         makeVideoCards()
 
@@ -38,15 +36,14 @@ export async function searchYoutube(e) {
    }
     
 async function makePagination() {
-    
+    let request = document.getElementById('request').value
     try {
-        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}&singleEvents=true&pageToken=${nextPageToken}`)
+        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}&pageToken=${nextPageToken}`)
         let results = await response.json()
         results.items.map(item => {
             list.add(item.id.videoId)
         })
         nextPageToken = results.nextPageToken
-        console.log(list)
         makeVideoCards()
 
     } catch (error) {
@@ -54,8 +51,12 @@ async function makePagination() {
     }
 }
 export  function makeVideoCards() {
-    
-    for (let i = 1; i <= list.size(); i++) {
+    let i = 1;
+    let size = Array.from(document.querySelectorAll('.video-wrapper')).length
+    if (wrapper) {
+    i = size
+  }
+    for (i; i <= list.size()-1; i++) {
     let videoWrapper = document.createElement('div')
     videoWrapper.className = 'video-wrapper'
     wrapper.appendChild(videoWrapper)
