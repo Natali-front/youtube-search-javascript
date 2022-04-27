@@ -3,24 +3,18 @@ import { wrapperFavorite } from ".."
 
 export const favoriteList = new LinkedList()
 
-export function makeFavoriteList() {
-    if(wrapperFavorite) {
-        wrapperFavorite.innerHTML = ''
-    }
-   JSON.parse(localStorage.getItem('myFavoriteList')).map(item => 
-    favoriteList.add(item)
-    )
-    
-}
 export function makeFavoriteVideoCards() {
    JSON.parse(localStorage.getItem('myFavoriteList')).map(item => 
-        favoriteList.add(item)
+        favoriteList.addAt(0, item)
         ) 
-        if(wrapperFavorite) {
-        wrapperFavorite.innerHTML= ''
-    }
-    
-    for(let i=1; i<=favoriteList.size(); i++) {
+        console.log(favoriteList)
+        let i = 1
+        let size = Array.from(document.querySelectorAll('.video-favorite')).length
+        if (wrapperFavorite) {
+        i = size
+      }
+    console.log(i)
+    for(i; i<=favoriteList.size()-1; i++) {
         let videoFavorite = document.createElement('div')
         videoFavorite.className = 'video-favorite'
         wrapperFavorite.appendChild(videoFavorite)
@@ -46,14 +40,16 @@ export function makeFavoriteVideoCards() {
         videoFavorite.appendChild(videoIframe)
        
         if (favoriteList.elementAt(i)) {
-            let videoId = favoriteList.elementAt(i).data
-            btnDelete.id = favoriteList.elementAt(i).data
+            let videoId = favoriteList.elementAt(i)
+            btnDelete.id = favoriteList.elementAt(i)
             videoIframe.src = `http://www.youtube.com/embed/${videoId}?autoplay=1?enablejsapi=1&origin=http://localhost:4200`
-        }    
+        }
+            
+      
     }
     }  Array.from(document.querySelectorAll('.btn-delete'), item => {
         item.addEventListener('click', event => {
-            console.log(event.target.value)
+        console.log(event.target.value)
         })
     })
           

@@ -129,7 +129,7 @@ main {
         justify-content:space-around;
 }
 .btn-delete {
-        width: 3rem;
+        width: 4rem;
         height: 2rem;
         border-radius: 5px;
         background-color: rgb(243, 170, 82);
@@ -139,8 +139,8 @@ main {
         box-shadow: inset;
 }
 .btn-delete svg {
-        width: 15px;
-        height: 15px;
+        width: 12px;
+        height: 12px;
 }
 .svg-inline--fa.fa-circle-down {
         margin-right: 14rem;

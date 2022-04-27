@@ -1,14 +1,18 @@
+function Node(element){
+    this.element = element
+    this.next = null
+}
 export default class LinkedList {
     constructor() {
         this.head = null
-        let length = 0
+        this.length = 0
     }
     size() {
-        return length
+        return this.length
     }
 
-    add(data) {
-        const node = { data, next: null }
+    add(element) {
+        let node = new Node(element)
         if (this.head === null) {
             this.head = node
         } else {
@@ -18,7 +22,27 @@ export default class LinkedList {
             }
             currentNode.next = node
         }
-        length++
+        this.length++
+    }
+    addAt(index, element){
+        let node = new Node(element)
+        let currentNode = this.head
+        let previousNode
+        let currentIndex = 0
+        if(index > length) return false
+        if(index===0){
+            node.next = currentNode
+            this.head = node
+        }else {
+            while(currentIndex < index){
+                currentIndex++
+                previousNode = currentNode
+                currentNode = currentNode.next
+            }
+            node.next = currentNode
+            previousNode.next = node
+        }
+        this.length++
     }
     elementAt(index) {
         let currentNode = this.head
@@ -27,7 +51,7 @@ export default class LinkedList {
             count++
             currentNode = currentNode.next
         }
-        return currentNode
+        return currentNode.element
     }
     remove(element) {
         let currentNode = this.head
@@ -41,7 +65,7 @@ export default class LinkedList {
             }
             previousNode.next = currentNode.next
         }
-        length--
+        this.length--
     }
     removeAt(index) {
         let currentNode = this.head 
@@ -58,12 +82,12 @@ export default class LinkedList {
             }
             previousNode.next = currentNode.next
         }
-        length--
+        this.length--
         return currentNode.element
     }
 
     deleteList() {
-        this.head === null
+        head === null
     }
     toArray() {
         const nodes = [];

@@ -56,6 +56,9 @@ export  function makeVideoCards() {
     if (wrapper) {
     i = size
   }
+  if (document.querySelector('.btn-load-more') === null){
+    makeBtnToLoadMore()    
+}
     for (i; i <= list.size()-1; i++) {
     let videoWrapper = document.createElement('div')
     videoWrapper.className = 'video-wrapper'
@@ -69,15 +72,11 @@ export  function makeVideoCards() {
     videoWrapper.appendChild(videoIframe)
    
     if (list.elementAt(i)) {
-        let videoId = list.elementAt(i).data
-        heart.id = list.elementAt(i).data
+        let videoId = list.elementAt(i)
+        heart.id = list.elementAt(i)
         videoIframe.src = `http://www.youtube.com/embed/${videoId}?autoplay=1?enablejsapi=1&origin=http://localhost:4200`
     }      
 } 
-
-if (document.querySelector('.btn-load-more') === null){
-    makeBtnToLoadMore()    
-}
 }
 
 
