@@ -4,7 +4,7 @@ import { wrapperFavorite } from ".."
 export const favoriteList = new LinkedList()
 
 export async function makeFavoriteVideoCards() {
-    if (Array.from(document.querySelectorAll('.video-favorite')).length === 0) {
+    if (Array.from(document.querySelectorAll('.video-favorite')).length === 0 && localStorage.getItem('myFavoriteList')) {
         let newArrFavorite = JSON.parse(localStorage.getItem('myFavoriteList'))
         newArrFavorite.map(item => {
             favoriteList.add(item)
@@ -12,13 +12,12 @@ export async function makeFavoriteVideoCards() {
     }
 
     let i = 1
-    if (Array.from(document.querySelectorAll('.video-favorite')).length > 0) {
+    if ( Array.from(document.querySelectorAll('.video-favorite')).length > 0 && localStorage.getItem('myFavoriteList')) {
         let size = Array.from(document.querySelectorAll('.video-favorite')).length + 1
         i = size
         let newArrFavorite = JSON.parse(localStorage.getItem('myFavoriteList'))
         favoriteList.add(newArrFavorite.slice(0, 1).join(' '))
     }
-
 
     for (i; i <= favoriteList.size() - 1; i++) {
         let videoFavorite = document.createElement('div')
@@ -53,11 +52,12 @@ export async function makeFavoriteVideoCards() {
 
 
     }
-} Array.from(document.querySelectorAll('.btn-delete'), item => {
-    item.addEventListener('click', event => {
-        console.log(event.target.value)
-    })
-})
+    // if ( Array.from(document.querySelectorAll('.video-favorite')).length > 0 && localStorage.getItem('myFavoriteList')===null) {
+    //     while (wrapperFavorite.firstChild) {
+    //         wrapperFavorite.removeChild(wrapperFavorite.firstChild);
+    //       }
+    // }
+} 
 
 
 

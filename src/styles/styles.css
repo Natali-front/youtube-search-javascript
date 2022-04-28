@@ -31,7 +31,7 @@ main {
         height: 100px;
         overflow: hidden;
 }
-.favorite-wrapper{
+.wrapper-fav{
         width: 35%;
         height: 100vh;
         margin-left: 20px;

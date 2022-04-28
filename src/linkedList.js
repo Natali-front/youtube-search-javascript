@@ -87,7 +87,7 @@ export default class LinkedList {
     }
 
     deleteList() {
-        head === null
+        this.head === null
     }
     toArray() {
         const nodes = [];

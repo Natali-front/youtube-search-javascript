@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
-import { makeFavoriteVideoCards, favoriteList, makeFavoriteList } from './favorites/favorites'
+import { makeFavoriteVideoCards, favoriteList } from './favorites/favorites'
 
 
 export const wrapper = document.querySelector('.wrapper')
@@ -22,8 +22,8 @@ wrapper.addEventListener('click', event => {
       arr.unshift(event.target.id)
       localStorage.setItem('myFavoriteList', JSON.stringify(arr))
       makeFavoriteVideoCards()
-    } 
-  }else {
+    }
+  } else {
     return
   }
 
@@ -31,15 +31,21 @@ wrapper.addEventListener('click', event => {
 function getIdFromLocalStorage() {
   return JSON.parse(localStorage.getItem('myFavoriteList') || '[]')
 }
+
 wrapperFavorite.addEventListener('click', functionToFavorite)
 
 function functionToFavorite(event) {
   if (event.target.tagName === 'BUTTON') {
     favoriteList.remove(event.target.id)
-   }
-     let newArr = getIdFromLocalStorage()
+    let newArr = getIdFromLocalStorage()
     newArr.splice(newArr.indexOf(event.target.id), 1)
     localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
-    
-  makeFavoriteVideoCards()
+    console.log(favoriteList)
+     makeFavoriteVideoCards()
+  }
+  if (event.target.id === "delete-all-favorite" && localStorage.getItem('myFavoriteList')) {
+    localStorage.removeItem('myFavoriteList')
+    makeFavoriteVideoCards()
+  }
+
 }
