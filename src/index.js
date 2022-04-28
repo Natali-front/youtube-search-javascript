@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
 import '@fortawesome/fontawesome-free/js/brands'
-import { makeFavoriteVideoCards, favoriteList } from './favorites/favorites'
+import { makeFavoriteVideoCards, favoriteList, makeFavoriteList } from './favorites/favorites'
 
 
 export const wrapper = document.querySelector('.wrapper')
@@ -18,11 +18,11 @@ wrapper.addEventListener('click', event => {
     if (chosenVideo.getAttribute('color') != 'red' || null) {
       chosenVideo.setAttribute('color', 'red')
       let arr = getIdFromLocalStorage()
-      // JSON.parse(localStorage.getItem('myFavoriteList'))
-      arr.push(event.target.id)
+      JSON.parse(localStorage.getItem('myFavoriteList'))
+      arr.unshift(event.target.id)
       localStorage.setItem('myFavoriteList', JSON.stringify(arr))
       makeFavoriteVideoCards()
-    }
+    } 
   }else {
     return
   }
@@ -34,7 +34,6 @@ function getIdFromLocalStorage() {
 wrapperFavorite.addEventListener('click', functionToFavorite)
 
 function functionToFavorite(event) {
-
   if (event.target.tagName === 'BUTTON') {
     favoriteList.remove(event.target.id)
    }

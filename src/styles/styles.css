@@ -40,6 +40,14 @@ main {
         position: relative;
         overflow-y: scroll;     
 }
+.video-favorite {
+        border: 1px dotted darkgray;
+        margin-top: 1rem;
+        padding: 0 2rem 2rem;
+}
+.video-favorite:hover {
+        box-shadow: 1px 1px 1px;
+}
 
 .header-favorite {
         padding-top: 1rem;
@@ -59,7 +67,6 @@ main {
         position: absolute; 
         left: 3%;
         top: 4%;
-    
         overflow: hidden
 }
 
