@@ -89,15 +89,6 @@ export default class LinkedList {
     deleteList() {
         this.head === null
     }
-    toArray() {
-        const nodes = [];
-        let currentNode = this.head;
-        while (currentNode) {
-            nodes.push(currentNode);
-            currentNode = currentNode.next;
-        }
-        return nodes;
-    }
 }
 export function swap(list, a, b) {
     let temp = list.elementAt(a).data;

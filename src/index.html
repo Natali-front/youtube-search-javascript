@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>youtube-search</title>
+    <link rel="import" href='./youtube-list/youtube.html'>
     <link rel="stylesheet" href="../src/styles/styles.css">
 </head>
 
@@ -16,7 +17,8 @@
         <input id="request" type="text" autofocus required placeholder="Введите запрос" />
     </div>
     <main>
-        <div class="wrapper"></div>
+        <div class="wrapper">
+        </div>
         <div class="wrapper-fav">
             <div class="header-favorite">
                 <img
@@ -27,6 +29,23 @@
             <div class="favorite-wrapper"></div>
         </div>
     </main>
+    <template id="template-video">
+        <div class="video-wrapper">
+            <i class="fa-regular fa-heart"></i>
+            <iframe class="video"></iframe>
+        </div>
+    </template>
+    <template id="template-favorite">
+        <div class="video-favorite">
+            <div class="option-block">
+                <i class="fa-solid fa-circle-up"></i>
+                <i class="fa-solid fa-circle-down"></i>
+                <button class="btn-delete"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <iframe class="video-fav"></iframe>
+        </div>
+    </template>
+    
     
 </body>
 

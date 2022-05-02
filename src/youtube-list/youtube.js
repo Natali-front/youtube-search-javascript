@@ -60,16 +60,12 @@ export function makeVideoCards() {
         makeBtnToLoadMore()
     }
     for (i; i <= list.size() - 1; i++) {
-        let videoWrapper = document.createElement('div')
-        videoWrapper.className = 'video-wrapper'
-        wrapper.appendChild(videoWrapper)
-        let videoIframe = document.createElement('iframe');
-        let heart = document.createElement('i')
-        heart.className = "fa-regular fa-heart"
-
-        videoWrapper.appendChild(heart)
-        videoIframe.className = 'video'
-        videoWrapper.appendChild(videoIframe)
+        let template = document.getElementById('template-video')
+        var clone = template.content.cloneNode(true);
+        wrapper.appendChild(clone)
+        let videoIframe = document.querySelectorAll('.video')[i]
+        let heart = document.querySelectorAll('.fa-regular.fa-heart')[i]
+        
 
         if (list.elementAt(i)) {
             let videoId = list.elementAt(i)
