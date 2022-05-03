@@ -8,7 +8,9 @@ import { makeFavoriteVideoCards, favoriteList } from './favorites/favorites'
 
 export const wrapper = document.querySelector('.wrapper')
 export const wrapperFavorite = document.querySelector('.favorite-wrapper')
+const wrapperBlockFav = document.querySelector('.wrapper-fav')
 document.getElementById('request').addEventListener('change', searchYoutube)
+
 makeFavoriteVideoCards()
 
 wrapper.addEventListener('click', event => {
@@ -35,17 +37,27 @@ function getIdFromLocalStorage() {
 wrapperFavorite.addEventListener('click', functionToFavorite)
 
 function functionToFavorite(event) {
-  if (event.target.tagName === 'BUTTON') {
-    favoriteList.remove(event.target.id)
+  if (event.target.tagName === 'BUTTON' && event.target.id != "delete-all-favorite") {
+    
+  
     let newArr = getIdFromLocalStorage()
     newArr.splice(newArr.indexOf(event.target.id), 1)
     localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
-    console.log(favoriteList)
-     makeFavoriteVideoCards()
+    favoriteList.removeAt(favoriteList.indexOf(event.target.id))
+    makeFavoriteVideoCards()
   }
+}
+wrapperBlockFav.addEventListener('click', deleteAllFav)
+
+function deleteAllFav(event){
   if (event.target.id === "delete-all-favorite" && localStorage.getItem('myFavoriteList')) {
     localStorage.removeItem('myFavoriteList')
+    for(let i=0; i<=favoriteList.size() + 1; i++){
+      favoriteList.removeAt(i)
+    }
     makeFavoriteVideoCards()
+  }else {
+    return
   }
 
 }

@@ -2,7 +2,7 @@ import LinkedList from '../linkedList';
 import { wrapper } from '..';
 
 
-const apiKey = "AIzaSyDtkb7Y94QYrpoWiQ78KkqKv_Bsbcb0txs"
+const apiKey = "AIzaSyCdpAYWWO1v16PLlO2oKOLwV3D90pFJd-U"
 let nextPageToken = null
 let amount = 9
 export const list = new LinkedList()
@@ -51,9 +51,11 @@ async function makePagination() {
     }
 }
 export function makeVideoCards() {
+    console.log(list)
     let i = 1;
-    let size = Array.from(document.querySelectorAll('.video-wrapper')).length
+   
     if (wrapper) {
+        let size = Array.from(document.querySelectorAll('.video-wrapper')).length 
         i = size
     }
     if (document.querySelector('.btn-load-more') === null) {
@@ -64,9 +66,9 @@ export function makeVideoCards() {
         var clone = template.content.cloneNode(true);
         wrapper.appendChild(clone)
         let videoIframe = document.querySelectorAll('.video')[i]
-        let heart = document.querySelectorAll('.fa-regular.fa-heart')[i]
+        let heart = document.querySelectorAll('.heart')[i]
         
-
+        
         if (list.elementAt(i)) {
             let videoId = list.elementAt(i)
             heart.id = list.elementAt(i)

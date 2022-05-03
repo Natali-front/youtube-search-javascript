@@ -44,6 +44,18 @@ export default class LinkedList {
         }
         this.length++
     }
+    indexOf(element) {
+        let currentNode = this.head
+        let index = -1 
+        while(currentNode) {
+            index++
+            if(currentNode.element===element) {
+                return index
+            }
+            currentNode = currentNode.next
+        }
+        return -1
+    }
     elementAt(index) {
         let currentNode = this.head
         let count = 0
@@ -67,13 +79,17 @@ export default class LinkedList {
         }
         this.length--
     }
+    isEmpty() {
+        return length === 0
+    }
+
     removeAt(index) {
         let currentNode = this.head 
         let previousNode
         let currentIndex = 0
         if (index < 0 || index >= length)
         if(index===0) {
-            head = currentIndex.next
+            this.head = currentIndex.next
         }else {
             while (currentIndex < index) {
                 currentIndex++
@@ -85,10 +101,7 @@ export default class LinkedList {
         this.length--
         return currentNode.element
     }
-
-    deleteList() {
-        this.head === null
-    }
+    
 }
 export function swap(list, a, b) {
     let temp = list.elementAt(a).data;
