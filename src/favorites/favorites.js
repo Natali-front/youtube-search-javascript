@@ -27,16 +27,21 @@ export async function makeFavoriteVideoCards() {
         wrapperFavorite.appendChild(cloneFav)
         let videoIframeFav = document.querySelectorAll('.video-fav')[i]
         let btnDelete = document.querySelectorAll('.btn-delete')[i]
+        let arrowDown = document.querySelectorAll('.change-down')[i]
+        let arrowUp = document.querySelectorAll('.change-up')[i]
+
 
         if (favoriteList.elementAt(i)) {
             let videoId = favoriteList.elementAt(i)
             btnDelete.id = favoriteList.elementAt(i)
+            arrowDown.id = favoriteList.elementAt(i)
+            arrowUp.id = favoriteList.elementAt(i)
             videoIframeFav.src = `http://www.youtube.com/embed/${videoId}?autoplay=1?enablejsapi=1&origin=http://localhost:4200`
         }
     }
 }
-export function redrawFavorite(favoriteList) {
-    console.log(favoriteList)
+export function redrawFavorite() {
+    
     if (wrapperFavorite) {
         wrapperFavorite.innerHTML = ''
     }
@@ -46,7 +51,7 @@ export function redrawFavorite(favoriteList) {
         wrapperFavorite.appendChild(cloneFav)
         let videoIframeFav = document.querySelectorAll('.video-fav')[i]
         let btnDelete = document.querySelectorAll('.btn-delete')[i]
-
+       
         if (favoriteList.elementAt(i)) {
             let videoId = favoriteList.elementAt(i)
             btnDelete.id = favoriteList.elementAt(i)

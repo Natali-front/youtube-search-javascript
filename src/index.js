@@ -11,7 +11,9 @@ export const wrapperFavorite = document.querySelector('.favorite-wrapper')
 const wrapperBlockFav = document.querySelector('.wrapper-fav')
 document.getElementById('request').addEventListener('change', searchYoutube)
 
-makeFavoriteVideoCards()
+if(localStorage.getItem('myFavoriteList')){
+  makeFavoriteVideoCards()
+}
 
 wrapper.addEventListener('click', event => {
   event.preventDefault()
@@ -28,8 +30,8 @@ wrapper.addEventListener('click', event => {
   } else {
     return
   }
-
 })
+
 function getIdFromLocalStorage() {
   return JSON.parse(localStorage.getItem('myFavoriteList') || '[]')
 }
@@ -37,16 +39,58 @@ function getIdFromLocalStorage() {
 wrapperFavorite.addEventListener('click', functionToFavorite)
 
 async function functionToFavorite(event) {
-  console.log(event.target.id)
+  event.preventDefault()
   if (event.target.tagName === 'BUTTON' && event.target.id != "delete-all-favorite") {
     let newArr = getIdFromLocalStorage()
     newArr.splice(newArr.indexOf(event.target.id), 1)
     localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
     favoriteList.removeAt(favoriteList.indexOf(event.target.id))
+    redrawFavorite()
+  }
+
+  if (event.target.classList.contains('change-up') && event.target.id) {
+    if (localStorage.getItem('myFavoriteList').length === 1) {
+      return
+    }
+    let newArr = getIdFromLocalStorage()
+    let indexToChange = newArr.indexOf(event.target.id)
+    let elementToChange = newArr.splice(indexToChange, 1).join('')
+    if (indexToChange >= 1) {
+      newArr.splice(indexToChange - 1, 0, elementToChange)
+    } else {
+      newArr.push(elementToChange)
+    }
+    localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
+    if (favoriteList.indexOf(event.target.id) <= 0) {
+      return
+    }
+    if (favoriteList.indexOf(event.target.id) >= 1) {
+      favoriteList.removeAt(favoriteList.indexOf(event.target.id))
+      favoriteList.addAt(favoriteList.indexOf(event.target.id) - 1, event.target.id)
+    }
     console.log(favoriteList)
-    redrawFavorite(favoriteList)
+    redrawFavorite()
+  }
+  if (event.target.classList.contains('change-down') && event.target.id) {
+    if (localStorage.getItem('myFavoriteList').length === 1) {
+      return
+    }
+    let newArr = getIdFromLocalStorage()
+    let indexToChange = newArr.indexOf(event.target.id)
+    let elementToChange = newArr.splice(indexToChange, 1).join('')
+    if (indexToChange >= 1) {
+      newArr.splice(indexToChange + 1, 0, elementToChange)
+    }
+    localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
+    if (favoriteList.indexOf(event.target.id) === favoriteList.size()) {
+      return
+    }
+    favoriteList.remove(event.target.id)
+    favoriteList.addAt(favoriteList.indexOf(event.target.id), event.target.id)
+    redrawFavorite()
   }
 }
+
 wrapperBlockFav.addEventListener('click', deleteAllFav)
 
 function deleteAllFav(event) {
@@ -58,5 +102,5 @@ function deleteAllFav(event) {
   } else {
     return
   }
-makeFavoriteVideoCards() 
+  makeFavoriteVideoCards()
 }

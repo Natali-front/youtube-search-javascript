@@ -152,6 +152,10 @@ main {
 .svg-inline--fa.fa-circle-down {
         margin-right: 14rem;
 }
+.svg-inline--fa.fa-circle-down:hover, .svg-inline--fa.fa-circle-up:hover {
+        cursor: pointer;
+        box-shadow: orange;
+}
 .svg-inline--fa{
         width: 20px;
         height: 20px;
