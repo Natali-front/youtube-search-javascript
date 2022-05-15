@@ -82,17 +82,38 @@ function getIdFromLocalStorage() {
 export async function functionToFavorite(event) {
     event.preventDefault()
     if (event.target.tagName === 'BUTTON' && event.target.id != "delete-all-favorite") {
-      let newArr = getIdFromLocalStorage()
-      newArr.splice(newArr.indexOf(event.target.id), 1)
-      localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
-      favoriteList.removeAt(favoriteList.indexOf(event.target.id))
-      redrawFavorite()
+      deleteOneFav()
     }
   
     if (event.target.classList.contains('change-up') && event.target.id) {
       if (localStorage.getItem('myFavoriteList').length === 1) {
         return
       }
+      liftUp()
+    }
+      if(event.target.classList.contains('change-down') && event.target.id){
+      toLowerDown()
+    }
+}
+    export async function deleteAllFav(event) {
+        if (event.target.id === "delete-all-favorite" && localStorage.getItem('myFavoriteList')) {
+          localStorage.removeItem('myFavoriteList')
+          for (let i = 0; i <= favoriteList.size() + 1; i++) {
+            favoriteList.removeAt(i)
+          }
+        } else {
+          return
+        }
+        makeFavoriteVideoCards()
+      }
+    function deleteOneFav() {
+      let newArr = getIdFromLocalStorage()
+      newArr.splice(newArr.indexOf(event.target.id), 1)
+      localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
+      favoriteList.removeAt(favoriteList.indexOf(event.target.id))
+      redrawFavorite()
+    }
+    function liftUp() {
       let newArr = getIdFromLocalStorage()
       let indexToChange = newArr.indexOf(event.target.id)
       let elementToChange = newArr.splice(indexToChange, 1).join('')
@@ -114,8 +135,8 @@ export async function functionToFavorite(event) {
       console.log(favoriteList)
       redrawFavorite(favoriteList)
     }
-      if(event.target.classList.contains('change-down') && event.target.id){
-         let newArr = getIdFromLocalStorage()
+    function toLowerDown() {
+      let newArr = getIdFromLocalStorage()
       let indexToChange = newArr.indexOf(event.target.id)
       let elementToChange = newArr.splice(indexToChange, 1).join('')
       if (indexToChange >= 1) {
@@ -129,19 +150,7 @@ export async function functionToFavorite(event) {
       favoriteList.addAt(favoriteList.indexOf(event.target.id), event.target.id)
       redrawFavorite(favoriteList)
       }
-    }
-
-    export async function deleteAllFav(event) {
-        if (event.target.id === "delete-all-favorite" && localStorage.getItem('myFavoriteList')) {
-          localStorage.removeItem('myFavoriteList')
-          for (let i = 0; i <= favoriteList.size() + 1; i++) {
-            favoriteList.removeAt(i)
-          }
-        } else {
-          return
-        }
-        makeFavoriteVideoCards()
-      }
+    
 
 
 

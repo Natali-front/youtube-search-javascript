@@ -1,5 +1,7 @@
 import LinkedList from '../linkedList';
 import { wrapper } from '..';
+import {fromFetch} from 'rxjs/fetch'
+import { switchMap, catchError } from 'rxjs';
 
 
 const apiKey = "AIzaSyCdpAYWWO1v16PLlO2oKOLwV3D90pFJd-U"
@@ -10,18 +12,30 @@ export const list = new LinkedList()
 export async function searchYoutube(e) {
     e.preventDefault()
     let request = e.target.value
-    try {
-        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}`)
-        let results = await response.json()
-        results.items.map(item => {
-            list.add(item.id.videoId)
-        })
-        nextPageToken = results.nextPageToken
+        const data$ = fromFetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}`).pipe(
+            switchMap(response => {
+                if(response.ok){
+                    return  response.json()
+                }
+        //         let results = response.json()
+        //         results.items.map(item => {
+        //     list.add(item.id.videoId)
+        // })
+        // nextPageToken = results.nextPageToken
+        // makeVideoCards()
+            }),
+        // let results = await response.json()
+        catchError(err => {
+         console.error(err)
+     })
+)
+data$.subscribe({
+    next: result => result.items.map(item => {
+        list.add(item.id.videoId)
+        nextPageToken = result.nextPageToken
         makeVideoCards()
-
-    } catch (error) {
-        console.log(error)
-    }
+    })
+})
 }
 
 function makeBtnToLoadMore() {
@@ -38,18 +52,25 @@ function makeBtnToLoadMore() {
 
 async function makePagination() {
     let request = document.getElementById('request').value
-    try {
-        let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}&pageToken=${nextPageToken}`)
-        let results = await response.json()
-        results.items.map(item => {
-            list.add(item.id.videoId)
-        })
-        nextPageToken = results.nextPageToken
-        makeVideoCards()
 
-    } catch (error) {
-        console.log(error)
-    }
+        let data$ = fromFetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}&pageToken=${nextPageToken}`).pipe(
+            switchMap(response => {
+                if(response.ok){
+                    return  response.json()
+                }
+            }),
+       
+        catchError(err => {
+         console.error(err)
+     })
+        )
+        data$.subscribe({
+            next: result => result.items.map(item => {
+                list.add(item.id.videoId)
+                nextPageToken = result.nextPageToken
+                makeVideoCards()
+            })
+        })
 }
 export function makeVideoCards() {
     let i = 1;
