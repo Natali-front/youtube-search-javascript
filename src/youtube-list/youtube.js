@@ -8,6 +8,7 @@ let amount = 9
 export const list = new LinkedList()
 
 export async function searchYoutube(e) {
+    e.preventDefault()
     let request = e.target.value
     try {
         let response = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${request}&title=snippet&order=rating&quotaUser=100&maxResults=${amount}&type=video&key=${apiKey}`)
@@ -51,7 +52,6 @@ async function makePagination() {
     }
 }
 export function makeVideoCards() {
-    console.log(list)
     let i = 1;
    
     if (wrapper) {

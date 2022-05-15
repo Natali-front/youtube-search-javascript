@@ -104,9 +104,9 @@ export default class LinkedList {
     
 }
 export function swap(list, a, b) {
-    let temp = list.elementAt(a).data;
-    list.elementAt(a).data = list.elementAt(b).data;
-    list.elementAt(b).data = temp
+    let temp = list.elementAt(a).element;
+    list.elementAt(a).element = list.elementAt(b).element;
+    list.elementAt(b).element = temp
 }
 
 export const Compare = {
