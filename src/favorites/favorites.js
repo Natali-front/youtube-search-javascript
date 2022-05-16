@@ -107,6 +107,7 @@ export async function functionToFavorite(event) {
         makeFavoriteVideoCards()
       }
     function deleteOneFav() {
+      console.log(event.target.id)
       let newArr = getIdFromLocalStorage()
       newArr.splice(newArr.indexOf(event.target.id), 1)
       localStorage.setItem('myFavoriteList', JSON.stringify(newArr))
@@ -132,7 +133,6 @@ export async function functionToFavorite(event) {
         favoriteList.remove(event.target.id)
         favoriteList.addAt(favoriteList.indexOf(event.target.id) - 1, event.target.id)
       }
-      console.log(favoriteList)
       redrawFavorite(favoriteList)
     }
     function toLowerDown() {
